@@ -1,7 +1,7 @@
 import XCTest
 import SwiftUI
 import SnapshotTesting
-import Neubrutalism
+@testable import Neubrutalism
 
 final class NeubrutalismTests: XCTestCase {
 	func test_neubrutalismStyleModifier() {
@@ -38,6 +38,11 @@ final class NeubrutalismTests: XCTestCase {
 			.textFieldStyle(NeubrutalismTextFieldStyle(isFocused: true, prefix: Image(uiImage: .actions), suffix: Image(uiImage: .checkmark)))
 			.padding(.horizontal, 16)
 		let vc = UIHostingController(rootView: view)
+		assertSnapshot(of: vc, as: .image(on: .iPhoneSe))
+	}
+	
+	func test_neubrutalismSampleView() {
+		let vc = UIHostingController(rootView: NeubrutalismView())
 		assertSnapshot(of: vc, as: .image(on: .iPhoneSe))
 	}
 }
