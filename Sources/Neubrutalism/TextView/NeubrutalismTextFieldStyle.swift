@@ -9,15 +9,24 @@ import SwiftUI
 
 public struct NeubrutalismTextFieldStyle: TextFieldStyle{
 	@State private var isFocused: Bool // Track focus state
-	private let borderColor: Color
 	private let prefix: Image?
 	private let suffix: Image?
 	
-	public init(isFocused: Bool = false, borderColor: Color = .black, prefix: Image? = nil, suffix: Image? = nil) {
+	private let background: Color
+	private let borderColor: Color
+	private let borderRadius: CGFloat
+	private let lineWidth: CGFloat
+	private let offset: CGFloat
+	
+	public init(isFocused: Bool = false, prefix: Image? = nil, suffix: Image? = nil, background: Color = .white, borderColor: Color = .black, borderRadius: CGFloat = 0, lineWidth: CGFloat = 2, offset: CGFloat = 4) {
 		self.isFocused = isFocused
-		self.borderColor = borderColor
 		self.prefix = prefix
 		self.suffix = suffix
+		self.background = background
+		self.borderRadius = borderRadius
+		self.lineWidth = lineWidth
+		self.offset = offset
+		self.borderColor = borderColor
 	}
 	
 	public func _body(configuration: TextField<Self._Label>) -> some View {
@@ -40,7 +49,7 @@ public struct NeubrutalismTextFieldStyle: TextFieldStyle{
 		.padding(.vertical, 8)
 		.padding(.horizontal, 8)
 		.frame(minHeight: 44)
-		.modifier(NeubrutalismStyle(borderColor: color))
+		.modifier(NeubrutalismStyle(background: background, borderColor: borderColor, borderRadius: borderRadius, lineWidth: lineWidth, offset: offset))
 	}
 }
 

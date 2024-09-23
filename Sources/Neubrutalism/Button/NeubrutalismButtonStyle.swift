@@ -9,24 +9,30 @@ import SwiftUI
 
 public struct NeubrutalismButtonStyle: ButtonStyle {
 	private let background: Color
+	private let borderColor: Color
+	private let borderRadius: CGFloat
+	private let lineWidth: CGFloat
+	private let offset: CGFloat
 	
-	public init(background: Color = .accentColor) {
+	public init(background: Color = .white, borderColor: Color = .black, borderRadius: CGFloat = 0, lineWidth: CGFloat = 2, offset: CGFloat = 4) {
 		self.background = background
+		self.borderRadius = borderRadius
+		self.lineWidth = lineWidth
+		self.offset = offset
+		self.borderColor = borderColor
 	}
 	
 	public func makeBody(configuration: Configuration) -> some View {
 		configuration.label
 			.frame(minHeight: 44)
-			.modifier(NeubrutalismStyle(background: background))
+			.modifier(NeubrutalismStyle(background: background, borderColor: borderColor, borderRadius: borderRadius, lineWidth: lineWidth, offset: offset))
 			.scaleEffect(configuration.isPressed ? 0.95 : 1.0)
 			.animation(.easeOut(duration: 0.2), value: configuration.isPressed)
 	}
 }
 
 #Preview {
-	Button {
-		
-	} label: {
+	Button {} label: {
 		Text("NeubrutalismStyle")
 			.padding(.vertical, 12)
 			.padding(.horizontal, 24)
